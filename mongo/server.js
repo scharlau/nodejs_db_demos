@@ -7,9 +7,15 @@ const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 
 const app = express();
+// update environment variables
+const dontenv = require('dotenv').config({
+  path: '/Users/csc228/Documents/WebApps/nodejs_db_demos/secrets/variables.env'
+})
 
 // connect to database
-const connectionString = "mongodb+srv://bruc3abdn:bruc3ABDN@cluster0.ky9uv.mongodb.net/star-wars-quotes?retryWrites=true&w=majority"
+const connectionString = process.env.DB_URL
+const hello = process.env.hello
+console.log(hello)
 MongoClient.connect(connectionString, (err, client) => {
     if (err) return console.error(err)
     console.log('Connected to Database')
