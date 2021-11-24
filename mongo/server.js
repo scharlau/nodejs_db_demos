@@ -34,7 +34,6 @@ MongoClient.connect(connectionString, (err, client) => {
   // url handlers (routes)
     app.get('/', (req, res) => {
       if (err) return console.error(err)
-     // const cursor = db.collection('quotes').find()
      db.collection('quotes').find().toArray()
      .then(results => {
       res.render('index.ejs', {quotes: results})
