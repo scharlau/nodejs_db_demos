@@ -1,0 +1,17 @@
+{
+  "name": "sqlite",
+  "version": "1.0.0",
+  "description": "express js plus sqlite demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bruce",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "md5": "^2.3.0",
+    "sqlite3": "^5.0.2"
+  }
+}
