@@ -26,3 +26,5 @@ You'll need to add a 'secrets' folder with the file 'variables.env' which holds 
 hello="hello"
 DB_URL="connectionformongodb"
 
+## Express JS with SQLite3
+The sqlite folder holds a database example using Express and SQLite3
