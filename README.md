@@ -37,5 +37,10 @@ The UPDATE method, at least using curl as a tool to pass in values, proved chall
 
 Note in particular the outer wrapping of double quotes and single quotes inside.
 
+The DELETE method via curl is easy to do:
+
+        curl -X DELETE http://localhost:8080/api/quote/5
+        
+
 ### Put a Web Front End On the SQLite Version
 The guide for this version didn't inclue any web pages. We can eventually add some forms and such based on the ones used for the mongodb version. 
