@@ -7,7 +7,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) =>{
         console.error(err.message)
         throw err
     } else {
-        console.log('conneted to database')
+        console.log('connected to database')
         db.run(`CREATE TABLE quotes (
             id INTEGER PRIMARY KEY,
             name text,

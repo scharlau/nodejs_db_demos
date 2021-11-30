@@ -37,4 +37,5 @@ The UPDATE method, at least using curl as a tool to pass in values, proved chall
 
 Note in particular the outer wrapping of double quotes and single quotes inside.
 
-The guide for this version didn't inclue any web pages, so we can repurpose the ones from the mongo version.
+### Put a Web Front End On
+The guide for this version didn't inclue any web pages. We can eventually add some forms and such based on the ones used for the mongodb version. 

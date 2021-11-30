@@ -3,19 +3,22 @@ var app = express()
 var db = require("./database.js")
 var bodyParser = require('body-parser')
 
+app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 var HTTP_PORT = 8080
 app.listen(HTTP_PORT, () => {
     console.log("server running on port %PORT".replace("%PORT", HTTP_PORT))
 });
+// original version
+// app.get('/', (req, res, next) => {
+//     res.json({"message": "OK"})
+// });
 
-app.get('/', (req, res, next) => {
-    res.json({"message": "OK"})
-});
-
-app.get("/api/quotes", (req,res, next) => {
+// revised as app route
+app.get("/", (req,res, next) => {
     var sql = "select * from quotes"
     var params = []
     db.all(sql, params, (err, rows) => {
@@ -23,10 +26,11 @@ app.get("/api/quotes", (req,res, next) => {
             res.status(400).json({"error": err.message});
             return
         }
-        res.json({
-            "message":"success",
-            "data":rows
-        })
+        res.render('index.ejs', {quotes: rows})
+        // res.json({
+        //     "message":"success",
+        //     "data":rows
+        // })
     });
 });
 
@@ -42,10 +46,11 @@ app.get("/api/quote/:id", (req, res, next) => {
             "message":"success",
             "data":row
         })
+        
       });
 });
-
-app.post("/api/quote/", (req,res, next) => {
+// originally app.post("/api/quote/", (req,res, next) => {
+app.post("/quotes", (req,res, next) => {
     var errors = []
     if (!req.body.name){
         errors.push("No name specified");
@@ -68,20 +73,24 @@ app.post("/api/quote/", (req,res, next) => {
             res.status(400).json({"error":"err.message"})
             return;
         }
-        res.json({
-            "message": "success",
-            "data": data,
-            "id": this.lastID
-        })
+        // res.json({
+        //     "message": "success",
+        //     "data": data,
+        //     "id": this.lastID
+        // })
+        res.redirect('/')
     })
 });
-
+// get one yoda quote to delete
+// then update that with vader quote
 app.patch("/api/quote/:id", (req, res, next) => {
     var data = {
         name: req.body.name,
         quote: req.body.quote
     }
     console.log(req.body.name, req.body.quote, req.params.id)
+    console.log(data)
+
     // note backtick for quote mark
     db.run( `UPDATE quotes SET
     name = ?,
@@ -98,6 +107,8 @@ app.patch("/api/quote/:id", (req, res, next) => {
             data: data,
             changes: this.changes
         })
+        console.log('update query run')
+        //res.redirect('/')
     });
 })
 
@@ -110,7 +121,10 @@ app.delete("/api/quote/:id", (req, res, next) => {
                 res.status(400).json({"error": res.message})
                 return;
             }
+            console.log('delete query run')
+            console.log(this.changes)
             res.json({"message":"deleted", changes: this.changes})
+           // res.redirect('/')
     });
 })
 
