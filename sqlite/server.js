@@ -101,6 +101,19 @@ app.patch("/api/quote/:id", (req, res, next) => {
     });
 })
 
+app.delete("/api/quote/:id", (req, res, next) => {
+    db.run(
+        'DELETE FROM quotes WHERE id = ?',
+        req.params.id,
+        function (err, result) {
+            if (err){
+                res.status(400).json({"error": res.message})
+                return;
+            }
+            res.json({"message":"deleted", changes: this.changes})
+    });
+})
+
 app.use(function(req, res){
     res.status(404);
 });
