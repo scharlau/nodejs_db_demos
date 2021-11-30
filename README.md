@@ -30,3 +30,10 @@ DB_URL="connectionformongodb"
 The sqlite folder holds a database example using Express and SQLite3. While this generally follows the example at https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/ it leaves out md5, which hashes passwords, in favour of using star war quotes so that it is similar to the mongoDb example.
 
 The example above left out some installation requirements for body-parser, which could be fixed with comparison to the mongoDB example. In particular, you need to install body-parser, and set it to use urlencode. Without them, the JSON convertion doesn't work.
+
+The UPDATE method, at least using curl as a tool to pass in values, proved challenging in order confirm it works correctly. While the option of sending data with curl as a data { } object, looked correct, it was actually, the use of strings that worked correctly as shown at https://www.taniarascia.com/making-api-requests-postman-curl/ You can test the update method with PATCH using this command:
+
+        curl -d "name='darth'&quote='your lack of faith is disturbing'" -X PATCH http://localhost:8080/api/quote/4
+
+Note in particular the outer wrapping of double quotes and single quotes inside.
+

@@ -76,6 +76,31 @@ app.post("/api/quote/", (req,res, next) => {
     })
 });
 
+app.patch("/api/quote/:id", (req, res, next) => {
+    var data = {
+        name: req.body.name,
+        quote: req.body.quote
+    }
+    console.log(req.body.name, req.body.quote, req.params.id)
+    // note backtick for quote mark
+    db.run( `UPDATE quotes SET
+    name = ?,
+    quote = ?
+    WHERE id = ?`,
+    [data.name, data.quote, req.params.id],
+    function(err, result){
+        if (err) {
+            res.status(400).json({"error": res.message})
+            return;
+        }
+        res.json({
+            message: "success",
+            data: data,
+            changes: this.changes
+        })
+    });
+})
+
 app.use(function(req, res){
     res.status(404);
 });
