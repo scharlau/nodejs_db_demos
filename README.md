@@ -27,4 +27,6 @@ hello="hello"
 DB_URL="connectionformongodb"
 
 ## Express JS with SQLite3
-The sqlite folder holds a database example using Express and SQLite3
+The sqlite folder holds a database example using Express and SQLite3. While this generally follows the example at https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/ it leaves out md5, which hashes passwords, in favour of using star war quotes so that it is similar to the mongoDb example.
+
+The example above left out some installation requirements for body-parser, which could be fixed with comparison to the mongoDB example. In particular, you need to install body-parser, and set it to use urlencode. Without them, the JSON convertion doesn't work.
