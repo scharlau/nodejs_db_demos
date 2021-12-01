@@ -50,7 +50,7 @@ app.get("/api/quote/:id", (req, res, next) => {
       });
 });
 // originally app.post("/api/quote/", (req,res, next) => {
-app.post("/quotes", (req,res, next) => {
+app.post("/quote", (req,res, next) => {
     var errors = []
     if (!req.body.name){
         errors.push("No name specified");

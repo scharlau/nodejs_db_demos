@@ -2,6 +2,11 @@ const update = document.querySelector('#update-button')
 const deleteButton = document.querySelector('#delete-button')
 const messageDiv = document.querySelector('#message')
 
+
+// using fetch - see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
+// to do this with sqlite will need to change queries
+// either find 'all' name=darth, or find id of first
+// same for delete version
 update.addEventListener('click', _ => {
   fetch('/api/quotes', {
       method: 'patch',
